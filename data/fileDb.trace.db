@@ -1,0 +1,18 @@
+2022-06-30 13:50:07 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "SELECT * FROM ELEC_READING GAS_READING [*]READING"; SQL statement:
+SELECT * FROM ELEC_READING GAS_READING READING [42000-214]
+2022-06-30 13:50:15 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "SELECT * FROM ELEC_READING GAS_READING [*]READING READING_ELEC_READINGS READING_GAS_READINGS"; SQL statement:
+SELECT * FROM ELEC_READING GAS_READING READING READING_ELEC_READINGS READING_GAS_READINGS [42000-214]
+2022-06-30 14:06:20 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLDataException: Data conversion error converting "'ELEC_READINGS' (READING: ""ACCOUNT_ID"" BIGINT NOT NULL)"; SQL statement:
+INSERT INTO "PUBLIC"."READING"("ACCOUNT_ID")VALUES(?) [22018-214]
+2022-06-30 14:06:20 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLDataException: Data conversion error converting "'ELEC_READINGS' (READING: ""ACCOUNT_ID"" BIGINT NOT NULL)"; SQL statement:
+INSERT INTO "PUBLIC"."READING"("ACCOUNT_ID")VALUES(?) [22018-214]
+2022-06-30 14:29:26 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "SELECT * FROM GAS_READING READING_ID [*]READING_ID"; SQL statement:
+SELECT * FROM GAS_READING READING_ID READING_ID [42000-214]
+2022-06-30 14:29:30 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "[*]METER_ID"; expected "MERGE"; SQL statement:
+METER_ID [42001-214]
