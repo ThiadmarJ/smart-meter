@@ -39,4 +39,15 @@ public class Reading {
         this.elecReadings = elecReadings;
     }
 
+    public Long getAccountId() {
+        return accountId;
+    }
+
+    public List<GasReading> getGasReadings() {
+        return gasReadings;
+    }
+
+    public List<ElecReading> getElecReadings() {
+        return elecReadings;
+    }
 }

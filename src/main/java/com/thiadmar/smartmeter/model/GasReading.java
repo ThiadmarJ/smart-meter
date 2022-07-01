@@ -25,4 +25,21 @@ public class GasReading {
         this.date = date;
         this.readingMain = readingMain;
     }
+
+    public Long getId() {
+        return id;
+    }
+
+    public Long getMeterId() {
+        return meterId;
+    }
+
+    public Long getReading() {
+        return reading;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
 }
