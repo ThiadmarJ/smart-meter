@@ -20,20 +20,20 @@ Response:
 {
  accountId: Number,
  gasReadings: [
- {
- id: Number,
- meterId: Number,
- reading: Number,
- date: Date
- }
+    {
+        id: Number,
+        meterId: Number,
+        reading: Number,
+        date: Date
+    }
  ],
  elecReadings: [
- {
- id: Number,
- meterId: Number,
- reading: Number,
- date: Date
- }
+    {
+        id: Number,
+        meterId: Number,
+        reading: Number,
+        date: Date
+    }
  ]
 }
 ```
