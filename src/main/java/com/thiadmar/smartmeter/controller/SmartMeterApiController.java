@@ -1,4 +1,4 @@
-package com.thiadmar.smartmeter.integration;
+package com.thiadmar.smartmeter.controller;
 
 import com.thiadmar.smartmeter.exceptions.ReadingNotFoundException;
 import com.thiadmar.smartmeter.model.Reading;

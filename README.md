@@ -4,12 +4,19 @@
 The purpose of the 'smart-meter' api is to allow consumers to receive
 information on their smart readings, through http requests.
 
-## Usages
+## Authentication
+username: 'user'
 
-This api uses a H2 database in order to store readings in memory
+password: 'password'
+
+
+## Usages
+This api uses a **H2** database in order to store readings in memory
 *(http://localhost:8081/h2)*
 
-MockMvc is used for integration testing
+**MockMvc** is used for integration testing
+
+**Basic Auth** is used for authentication with **BCrypt** to hash the stored password internally
 
 
 ## Endpoints
