@@ -2,12 +2,12 @@ package com.thiadmar.smartmeter.controller;
 
 import com.thiadmar.smartmeter.exceptions.ReadingNotFoundException;
 import com.thiadmar.smartmeter.model.Reading;
+import com.thiadmar.smartmeter.model.ReadingResponse;
 import com.thiadmar.smartmeter.repository.ReadingRepository;
 import com.thiadmar.smartmeter.service.InitialiseRepositoryService;
+import com.thiadmar.smartmeter.service.SmartMeterApiService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.PostConstruct;
 import java.util.Optional;
@@ -21,20 +21,23 @@ public class SmartMeterApiController {
     @Autowired
     private InitialiseRepositoryService initialiseRepositoryService;
 
+    private SmartMeterApiService smartMeterApiService;
+
     @PostConstruct
     private void postConstruct() {
         int numRecords = 10;
         int numInnerRecords = 3;
         initialiseRepositoryService.initialiseRepository(numRecords, numInnerRecords);
+        smartMeterApiService = new SmartMeterApiService(readingRepository);
     }
 
     @GetMapping("/api/smart/reads/{accountNumber}")
     public Reading getReading(@PathVariable Long accountNumber) {
-        Optional<Reading> reading = readingRepository.findById(accountNumber);
-        if (reading.isEmpty()) {
-            throw new ReadingNotFoundException("Could not find account with account id '"+accountNumber+"' in repository.");
-        } else {
-            return reading.get();
-        }
+        return smartMeterApiService.retrieveReading(accountNumber);
+    }
+
+    @PostMapping("/api/smart/reads")
+    public ReadingResponse postReading(@RequestBody Reading reading) {
+        return smartMeterApiService.receiveReading(reading);
     }
 }
