@@ -67,15 +67,11 @@ public class SmartMeterApiService {
             for (int j = i + 1; j < reading.getElecReadings().size(); j++) {
                 ElecReading penultimateElecReading = null;
                 ElecReading curElecReading = reading.getElecReadings().get(j);
-                if (latestElecReading.getMeterId() == curElecReading.getMeterId()) {
+                if (latestElecReading.getMeterId().equals(curElecReading.getMeterId())) {
                     //checking current read is after current latest
                     if (latestElecReading.getDate().after(curElecReading.getDate())) {
                         //checking there is no second last reading or second last reading is before current
-                        if (penultimateElecReading == null) {
-                            penultimateElecReading = curElecReading;
-                        } else if (penultimateElecReading.getDate().before(curElecReading.getDate())) {
-                            penultimateElecReading = curElecReading;
-                        }
+                        penultimateElecReading = curElecReading;
                     } else {
                         latestElecReading = curElecReading;
                     }
@@ -92,15 +88,11 @@ public class SmartMeterApiService {
             for (int j = i + 1; j < reading.getGasReadings().size(); j++) {
                 GasReading penultimateGasReading = null;
                 GasReading curGasReading = reading.getGasReadings().get(j);
-                if (latestGasReading.getMeterId() == curGasReading.getMeterId()) {
+                if (latestGasReading.getMeterId().equals(curGasReading.getMeterId())) {
                     //checking current read is after current latest
                     if (latestGasReading.getDate().after(curGasReading.getDate())) {
                         //checking there is no second last reading or second last reading is before current
-                        if (penultimateGasReading == null) {
-                            penultimateGasReading = curGasReading;
-                        } else if (penultimateGasReading.getDate().before(curGasReading.getDate())) {
-                            penultimateGasReading = curGasReading;
-                        }
+                        penultimateGasReading = curGasReading;
                     } else {
                         latestGasReading = curGasReading;
                     }
@@ -142,7 +134,7 @@ public class SmartMeterApiService {
             curElecReading = reading.getElecReadings().get(i);
             for (int j = i + 1; j < reading.getElecReadings().size(); j++) {
                 ElecReading elecReadingToProcess = reading.getElecReadings().get(j);
-                if (curElecReading.getMeterId() == elecReadingToProcess.getMeterId()) {
+                if (curElecReading.getMeterId().equals(elecReadingToProcess.getMeterId())) {
                     if (curElecReading.getDate().compareTo(elecReadingToProcess.getDate()) == 0) {
                         cleanReading.getElecReadings().remove(curElecReading);
                         i--;
@@ -156,7 +148,7 @@ public class SmartMeterApiService {
             curGasReading = reading.getGasReadings().get(i);
             for (int j = i + 1; j < reading.getGasReadings().size(); j++) {
                 GasReading gasReadingToProcess = reading.getGasReadings().get(j);
-                if (curGasReading.getMeterId() == gasReadingToProcess.getMeterId()) {
+                if (curGasReading.getMeterId().equals(gasReadingToProcess.getMeterId())) {
                     if (curGasReading.getDate().compareTo(gasReadingToProcess.getDate()) == 0) {
                         cleanReading.getGasReadings().remove(curGasReading);
                         i--;

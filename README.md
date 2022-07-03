@@ -65,4 +65,16 @@ RequestBody:
  ]
 }
 
+Response:
+{
+    "accountId": Number,
+    "readings": [
+        {
+            "id": Number,
+            "meterId": Number,
+            "usageSinceLastRead": Number,
+            "periodSinceLastRead": Number
+        }
+    ]
+}
 ```

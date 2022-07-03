@@ -13,6 +13,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.Objects;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @RunWith(SpringRunner.class)
@@ -38,7 +40,7 @@ public class SmartMeterApiControllerTest {
         ResponseEntity<Reading> result = template.withBasicAuth(USERNAME, PASSWORD)
                 .getForEntity(URL_PATH + ACCOUNT_ID, Reading.class);
         assertEquals(HttpStatus.OK, result.getStatusCode());
-        assertEquals(ACCOUNT_ID, result.getBody().getAccountId());
+        assertEquals(ACCOUNT_ID, Objects.requireNonNull(result.getBody()).getAccountId());
     }
 
     @Test
@@ -61,7 +63,7 @@ public class SmartMeterApiControllerTest {
         ResponseEntity<ReadingResponse> result =  template.withBasicAuth(USERNAME,PASSWORD)
                 .postForEntity(URL_PATH, reading, ReadingResponse.class);
         assertEquals(HttpStatus.OK, result.getStatusCode());
-        assertEquals(ACCOUNT_ID, result.getBody().getAccountId());
+        assertEquals(ACCOUNT_ID, Objects.requireNonNull(result.getBody()).getAccountId());
     }
 
 }
