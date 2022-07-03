@@ -1,8 +1,8 @@
 package com.thiadmar.smartmeter.service;
 
-import com.thiadmar.smartmeter.model.ElecReading;
-import com.thiadmar.smartmeter.model.GasReading;
-import com.thiadmar.smartmeter.model.Reading;
+import com.thiadmar.smartmeter.model.reading.ElecReading;
+import com.thiadmar.smartmeter.model.reading.GasReading;
+import com.thiadmar.smartmeter.model.reading.Reading;
 import com.thiadmar.smartmeter.repository.ReadingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

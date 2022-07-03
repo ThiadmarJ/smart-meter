@@ -1,9 +1,9 @@
 package com.thiadmar.smartmeter.service;
 
-import com.thiadmar.smartmeter.model.ElecReading;
-import com.thiadmar.smartmeter.model.GasReading;
-import com.thiadmar.smartmeter.model.Reading;
-import com.thiadmar.smartmeter.model.ReadingResponse;
+import com.thiadmar.smartmeter.model.reading.ElecReading;
+import com.thiadmar.smartmeter.model.reading.GasReading;
+import com.thiadmar.smartmeter.model.reading.Reading;
+import com.thiadmar.smartmeter.model.response.ReadingResponse;
 import com.thiadmar.smartmeter.repository.ReadingRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -14,6 +14,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.time.Instant;
+import java.time.MonthDay;
 import java.util.Date;
 import java.util.List;
 
@@ -44,7 +45,7 @@ class SmartMeterApiServiceTest {
 
         Reading exampleReading = new Reading(11L);
         ReadingResponse response = smartMeterApiService.receiveReading(exampleReading);
-        Assertions.assertEquals(response.getId(), exampleReading.getAccountId());
+        Assertions.assertEquals(response.getAccountId(), exampleReading.getAccountId());
     }
 
     @Test
@@ -79,5 +80,26 @@ class SmartMeterApiServiceTest {
 
         Assertions.assertEquals(receivedReading.getGasReadings().size(), 2);
         Assertions.assertEquals(receivedReading.getElecReadings().size(), 2);
+    }
+
+    @Test
+    void should_return_correct_response_after_two_readings() {
+        Reading exampleReading = new Reading(11L);
+        GasReading gasReading = new GasReading(1L, 2L, Date.from(Instant.now().minusSeconds(86400)), exampleReading);
+        List<GasReading> gasReadings = List.of(gasReading);
+        exampleReading.setGasReadings(gasReadings);
+
+        ReadingResponse result1 = smartMeterApiService.receiveReading(exampleReading);
+
+        Reading exampleReading2 = new Reading(11L);
+        GasReading gasReading2 = new GasReading(1L, 20L, Date.from(Instant.now()), exampleReading2);
+        List<GasReading> gasReadings2 = List.of(gasReading2);
+        exampleReading2.setGasReadings(gasReadings2);
+
+        ReadingResponse result2 = smartMeterApiService.receiveReading(exampleReading2);
+        Long usage = result2.getReadings().get(0).getUsageSinceLastRead();
+        Long days = result2.getReadings().get(0).getPeriodSinceLastRead();
+        Assertions.assertEquals(18, usage);
+        Assertions.assertEquals(1, days);
     }
 }

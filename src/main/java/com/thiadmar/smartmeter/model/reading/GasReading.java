@@ -1,11 +1,11 @@
-package com.thiadmar.smartmeter.model;
+package com.thiadmar.smartmeter.model.reading;
 
 import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "Elec_Readings")
-public class ElecReading {
+@Table(name = "Gas_Readings")
+public class GasReading {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -19,10 +19,11 @@ public class ElecReading {
     @JoinColumn(name = "reading_id")
     private Reading readingMain;
 
-    public ElecReading() {
+    public GasReading() {
     }
 
-    public ElecReading( Long meterId, Long reading, Date date, Reading readingMain) {
+    public GasReading(Long meterId, Long reading, Date date, Reading readingMain) {
+
         this.meterId = meterId;
         this.reading = reading;
         this.date = date;

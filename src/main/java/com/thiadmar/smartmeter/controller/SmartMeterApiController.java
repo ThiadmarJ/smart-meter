@@ -1,8 +1,7 @@
 package com.thiadmar.smartmeter.controller;
 
-import com.thiadmar.smartmeter.exceptions.ReadingNotFoundException;
-import com.thiadmar.smartmeter.model.Reading;
-import com.thiadmar.smartmeter.model.ReadingResponse;
+import com.thiadmar.smartmeter.model.reading.Reading;
+import com.thiadmar.smartmeter.model.response.ReadingResponse;
 import com.thiadmar.smartmeter.repository.ReadingRepository;
 import com.thiadmar.smartmeter.service.InitialiseRepositoryService;
 import com.thiadmar.smartmeter.service.SmartMeterApiService;
@@ -10,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.PostConstruct;
-import java.util.Optional;
 
 @RestController
 public class SmartMeterApiController {

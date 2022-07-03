@@ -1,20 +1,16 @@
 package com.thiadmar.smartmeter.integration;
 
-import com.thiadmar.smartmeter.model.Reading;
-import com.thiadmar.smartmeter.model.ReadingResponse;
+import com.thiadmar.smartmeter.model.reading.Reading;
+import com.thiadmar.smartmeter.model.response.InnerReadingResponse;
+import com.thiadmar.smartmeter.model.response.ReadingResponse;
 import com.thiadmar.smartmeter.repository.ReadingRepository;
-import com.thiadmar.smartmeter.service.SmartMeterApiService;
 import org.junit.Test;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.boot.test.web.client.TestRestTemplate;
-import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.test.context.event.annotation.BeforeTestMethod;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -38,7 +34,7 @@ public class SmartMeterApiControllerTest {
     public void should_store_then_return_reading() {
         Reading reading = new Reading(ACCOUNT_ID);
         template.withBasicAuth(USERNAME,PASSWORD)
-                .postForEntity(URL_PATH, reading, ReadingResponse.class);
+                .postForEntity(URL_PATH, reading, InnerReadingResponse.class);
         ResponseEntity<Reading> result = template.withBasicAuth(USERNAME, PASSWORD)
                 .getForEntity(URL_PATH + ACCOUNT_ID, Reading.class);
         assertEquals(HttpStatus.OK, result.getStatusCode());
@@ -65,7 +61,7 @@ public class SmartMeterApiControllerTest {
         ResponseEntity<ReadingResponse> result =  template.withBasicAuth(USERNAME,PASSWORD)
                 .postForEntity(URL_PATH, reading, ReadingResponse.class);
         assertEquals(HttpStatus.OK, result.getStatusCode());
-        assertEquals(ACCOUNT_ID, result.getBody().getId());
+        assertEquals(ACCOUNT_ID, result.getBody().getAccountId());
     }
 
 }

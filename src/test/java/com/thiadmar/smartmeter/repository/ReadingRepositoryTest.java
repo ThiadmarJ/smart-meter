@@ -1,9 +1,9 @@
 package com.thiadmar.smartmeter.repository;
 
 import com.google.common.collect.Iterables;
-import com.thiadmar.smartmeter.model.ElecReading;
-import com.thiadmar.smartmeter.model.GasReading;
-import com.thiadmar.smartmeter.model.Reading;
+import com.thiadmar.smartmeter.model.reading.ElecReading;
+import com.thiadmar.smartmeter.model.reading.GasReading;
+import com.thiadmar.smartmeter.model.reading.Reading;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;

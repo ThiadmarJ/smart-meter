@@ -1,6 +1,6 @@
 package com.thiadmar.smartmeter.repository;
 
-import com.thiadmar.smartmeter.model.ElecReading;
+import com.thiadmar.smartmeter.model.reading.ElecReading;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 

@@ -1,4 +1,4 @@
-package com.thiadmar.smartmeter.model;
+package com.thiadmar.smartmeter.model.reading;
 
 import javax.persistence.*;
 import java.util.List;
