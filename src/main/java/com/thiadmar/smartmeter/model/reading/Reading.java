@@ -1,4 +1,4 @@
-package com.thiadmar.smartmeter.model;
+package com.thiadmar.smartmeter.model.reading;
 
 import javax.persistence.*;
 import java.util.List;
@@ -29,6 +29,12 @@ public class Reading {
 
     public Reading(Long accountId) {
         this.accountId = accountId;
+    }
+
+    public Reading(Long accountId, List<GasReading> gasReadings, List<ElecReading> elecReadings) {
+        this.accountId = accountId;
+        this.gasReadings = gasReadings;
+        this.elecReadings = elecReadings;
     }
 
     public void setGasReadings(List<GasReading> gasReadings) {

@@ -1,6 +1,8 @@
 package com.thiadmar.smartmeter.integration;
 
-import com.thiadmar.smartmeter.model.Reading;
+import com.thiadmar.smartmeter.model.reading.Reading;
+import com.thiadmar.smartmeter.model.response.InnerReadingResponse;
+import com.thiadmar.smartmeter.model.response.ReadingResponse;
 import com.thiadmar.smartmeter.repository.ReadingRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -10,6 +12,8 @@ import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
+
+import java.util.Objects;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -29,19 +33,20 @@ public class SmartMeterApiControllerTest {
     private static final String URL_PATH = "/api/smart/reads/";
 
     @Test
-    public void should_return_ok_and_expected_body_when_retrieving_reading() {
+    public void should_store_then_return_reading() {
         Reading reading = new Reading(ACCOUNT_ID);
-        readingRepository.save(reading);
+        template.withBasicAuth(USERNAME,PASSWORD)
+                .postForEntity(URL_PATH, reading, InnerReadingResponse.class);
         ResponseEntity<Reading> result = template.withBasicAuth(USERNAME, PASSWORD)
                 .getForEntity(URL_PATH + ACCOUNT_ID, Reading.class);
         assertEquals(HttpStatus.OK, result.getStatusCode());
-        assertEquals(ACCOUNT_ID, result.getBody().getAccountId());
+        assertEquals(ACCOUNT_ID, Objects.requireNonNull(result.getBody()).getAccountId());
     }
 
     @Test
     public void should_return_not_found_when_user_not_found() {
         ResponseEntity<Reading> result = template.withBasicAuth(USERNAME, PASSWORD)
-                .getForEntity(URL_PATH + ACCOUNT_ID, Reading.class);
+                .getForEntity(URL_PATH + 10, Reading.class);
         assertEquals(HttpStatus.NOT_FOUND, result.getStatusCode());
     }
 
@@ -51,4 +56,14 @@ public class SmartMeterApiControllerTest {
                 .getForEntity(URL_PATH + ACCOUNT_ID, Reading.class);
         assertEquals(HttpStatus.UNAUTHORIZED, result.getStatusCode());
     }
+
+    @Test
+    public void should_accept_reading() {
+        Reading reading = new Reading(ACCOUNT_ID);
+        ResponseEntity<ReadingResponse> result =  template.withBasicAuth(USERNAME,PASSWORD)
+                .postForEntity(URL_PATH, reading, ReadingResponse.class);
+        assertEquals(HttpStatus.OK, result.getStatusCode());
+        assertEquals(ACCOUNT_ID, Objects.requireNonNull(result.getBody()).getAccountId());
+    }
+
 }

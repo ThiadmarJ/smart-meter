@@ -1,9 +1,9 @@
 package com.thiadmar.smartmeter.repository;
 
 import com.google.common.collect.Iterables;
-import com.thiadmar.smartmeter.model.ElecReading;
-import com.thiadmar.smartmeter.model.GasReading;
-import com.thiadmar.smartmeter.model.Reading;
+import com.thiadmar.smartmeter.model.reading.ElecReading;
+import com.thiadmar.smartmeter.model.reading.GasReading;
+import com.thiadmar.smartmeter.model.reading.Reading;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
@@ -25,8 +25,8 @@ class ReadingRepositoryTest {
 
     private static final Reading reading = new Reading(123L);
     private static final Date testDate = Date.from(Instant.EPOCH);
-    private static final GasReading gasReading = new GasReading(1L, 2L, 3L, testDate, reading);
-    private static final ElecReading elecReading = new ElecReading(1L, 2L, 3L, testDate, reading);
+    private static final GasReading gasReading = new GasReading(2L, 3L, testDate, reading);
+    private static final ElecReading elecReading = new ElecReading(2L, 3L, testDate, reading);
     private static final List<GasReading> gasReadings = List.of(gasReading);
     private static final List<ElecReading> elecReadings = List.of(elecReading);
 
@@ -47,7 +47,7 @@ class ReadingRepositoryTest {
         readingRepository.save(reading);
 
         Iterable<Reading> readings = readingRepository.findAll();
-        Assertions.assertEquals(Iterables.size(readings), 1);
+        Assertions.assertEquals(1, Iterables.size(readings));
     }
 
     @Test
@@ -61,10 +61,10 @@ class ReadingRepositoryTest {
         reading.setGasReadings(gasReadings);
         reading.setElecReadings(elecReadings);
         readingRepository.save(reading);
-        readingRepository.delete(reading);
+        readingRepository.deleteAll();
 
         Iterable<Reading> readings = readingRepository.findAll();
-        Assertions.assertEquals(Iterables.size(readings), 0);
+        Assertions.assertEquals(0, Iterables.size(readings));
     }
 
 }

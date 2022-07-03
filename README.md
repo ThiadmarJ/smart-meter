@@ -43,4 +43,38 @@ Response:
     }
  ]
 }
+
+Request:
+POST: http://localhost:8081/api/smart/reads
+RequestBody:
+{
+ accountId: Number,
+ gasReadings: [
+    {
+        meterId: Number,
+        reading: Number,
+        date: Date
+    }
+ ],
+ elecReadings: [
+    {
+        meterId: Number,
+        reading: Number,
+        date: Date
+    }
+ ]
+}
+
+Response:
+{
+    "accountId": Number,
+    "readings": [
+        {
+            "id": Number,
+            "meterId": Number,
+            "usageSinceLastRead": Number,
+            "periodSinceLastRead": Number
+        }
+    ]
+}
 ```

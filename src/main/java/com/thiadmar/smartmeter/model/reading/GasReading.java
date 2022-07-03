@@ -1,4 +1,5 @@
-package com.thiadmar.smartmeter.model;
+package com.thiadmar.smartmeter.model.reading;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -7,19 +8,22 @@ import java.util.Date;
 public class GasReading {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private Long meterId;
     private Long reading;
     private Date date;
-    @ManyToOne
+    @ManyToOne(
+            cascade = CascadeType.ALL
+    )
     @JoinColumn(name = "reading_id")
     private Reading readingMain;
 
     public GasReading() {
     }
 
-    public GasReading(Long id, Long meterId, Long reading, Date date, Reading readingMain) {
-        this.id = id;
+    public GasReading(Long meterId, Long reading, Date date, Reading readingMain) {
+
         this.meterId = meterId;
         this.reading = reading;
         this.date = date;
@@ -42,4 +46,7 @@ public class GasReading {
         return date;
     }
 
+    public void setReadingMain(Reading readingMain) {
+        this.readingMain = readingMain;
+    }
 }

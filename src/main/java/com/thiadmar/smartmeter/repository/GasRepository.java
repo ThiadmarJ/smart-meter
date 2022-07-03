@@ -1,6 +1,6 @@
 package com.thiadmar.smartmeter.repository;
 
-import com.thiadmar.smartmeter.model.GasReading;
+import com.thiadmar.smartmeter.model.reading.GasReading;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
