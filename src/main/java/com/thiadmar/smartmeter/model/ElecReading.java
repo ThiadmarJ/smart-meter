@@ -8,19 +8,21 @@ import java.util.Date;
 public class ElecReading {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private Long meterId;
     private Long reading;
     private Date date;
-    @ManyToOne
+    @ManyToOne(
+            cascade = CascadeType.ALL
+    )
     @JoinColumn(name = "reading_id")
     private Reading readingMain;
 
     public ElecReading() {
     }
 
-    public ElecReading(Long id, Long meterId, Long reading, Date date, Reading readingMain) {
-        this.id = id;
+    public ElecReading( Long meterId, Long reading, Date date, Reading readingMain) {
         this.meterId = meterId;
         this.reading = reading;
         this.date = date;
@@ -41,5 +43,9 @@ public class ElecReading {
 
     public Date getDate() {
         return date;
+    }
+
+    public void setReadingMain(Reading readingMain) {
+        this.readingMain = readingMain;
     }
 }

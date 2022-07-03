@@ -31,6 +31,12 @@ public class Reading {
         this.accountId = accountId;
     }
 
+    public Reading(Long accountId, List<GasReading> gasReadings, List<ElecReading> elecReadings) {
+        this.accountId = accountId;
+        this.gasReadings = gasReadings;
+        this.elecReadings = elecReadings;
+    }
+
     public void setGasReadings(List<GasReading> gasReadings) {
         this.gasReadings = gasReadings;
     }
